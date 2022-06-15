@@ -1,27 +1,19 @@
-<h2>Products</h2>
-<table class="table table-striped table-hover">
-  <thead class="table-dark">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Image</th>
-      <th scope="col">Name</th>
-      <th scope="col">Price</th>
-      <th scope="col">UnitsInStock</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let product of productResponse.products; let i = index">
-      <th scope="row">{{ i + 1 }}</th>
-      <td>
-        <img
-          src="{{ product.imageUrl }}"
-          alt="{{ product.name }}"
-          height="50"
-        />
-      </td>
-      <td>{{ product.name }}</td>
-      <td>{{ product.unitPrice | currency:'USD'}}</td>
-      <td>{{ product.unitsInStock }}</td>
-    </tr>
-  </tbody>
-</table>
+<div class="main-content">
+  <div class="section-content section-content-p30">
+    <div class="container-fluid">
+      <div class="row">
+        <div
+          class="col-md-3"
+          *ngFor="let product of productResponse.products; let i = index"
+        >
+          <div class="product-box">
+            <img src="{{ product.imageUrl }}" class="img-responsive" alt="" />
+            <h1>{{ product.name }}</h1>
+            <div class="price">{{ product.unitPrice | currency: "USD" }}</div>
+            <a href="#" class="primary-btn">Add to cart</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

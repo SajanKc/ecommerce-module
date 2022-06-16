@@ -1,0 +1,15 @@
+<form
+  #mySearchForm="ngForm"
+  class="form-header"
+  (ngSubmit)="doSearch(mySearchForm.value)"
+>
+  <input
+    ngModel
+    type="text"
+    name="search"
+    class="au-input au-input-xl"
+    placeholder="Search for products ..."
+    (keyup.enter)="doSearch(mySearchForm.value)"
+  />
+  <button class="au-btn-submit" type="submit">Search</button>
+</form>

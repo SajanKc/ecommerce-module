@@ -18,4 +18,10 @@ export class ProductService {
       this.baseUrl.concat(this.apiEndPoint)
     );
   }
+
+  getSearchProduct(value: string): Observable<ProductResponse> {
+    return this.httpClient.get<ProductResponse>(
+      this.baseUrl.concat(this.apiEndPoint).concat(`/search?q=${value}`)
+    );
+  }
 }

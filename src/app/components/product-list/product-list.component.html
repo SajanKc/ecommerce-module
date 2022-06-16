@@ -1,6 +1,13 @@
 <div class="main-content">
   <div class="section-content section-content-p30">
     <div class="container-fluid">
+      <div
+        class="alert alert-warning col-md-12"
+        role="alert"
+        *ngIf="productResponse.total === 0"
+      >
+        Products Not Found !!!
+      </div>
       <div class="row">
         <div
           class="col-md-3"

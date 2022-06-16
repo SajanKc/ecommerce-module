@@ -15,7 +15,9 @@ export class ProductListComponent implements OnInit {
   productCategoryResponse = {} as ProductCategoryResponse;
 
   id: string = '';
+  searchQuery: string = '';
   hasCategoryId: boolean = false;
+  hasSearchQuery: boolean = false;
 
   constructor(
     private productService: ProductService,
@@ -25,12 +27,21 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit(): void {
     this.hasCategoryId = this.activatedRoute.snapshot.paramMap.has('id');
+    this.hasSearchQuery = this.activatedRoute.snapshot.queryParamMap.has('q');
 
+    // filtering by category id
     if (this.hasCategoryId) {
       this.activatedRoute.paramMap.subscribe((params) => {
         this.id = params.get('id') || '';
         this.getProductByCategoryId(this.id);
       });
+      // filtering by search query
+    } else if (this.hasSearchQuery) {
+      this.activatedRoute.queryParamMap.subscribe((params) => {
+        this.searchQuery = params.get('q') || '';
+        this.getSearchedProduct(this.searchQuery);
+      });
+      // default
     } else {
       this.getAllProduct();
     }
@@ -44,6 +55,12 @@ export class ProductListComponent implements OnInit {
 
   getProductByCategoryId(id: string) {
     this.productCategoryService.getProductByCategoryId(id).subscribe((data) => {
+      this.productResponse = data;
+    });
+  }
+
+  getSearchedProduct(search: string) {
+    this.productService.getSearchProduct(search).subscribe((data) => {
       this.productResponse = data;
     });
   }

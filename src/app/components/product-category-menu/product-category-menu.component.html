@@ -1,0 +1,31 @@
+<!-- MENU SIDEBAR-->
+<aside class="menu-sidebar d-none d-lg-block">
+  <div class="logo">
+    <a href="#">
+      <img
+        src="assets/images/logo.png"
+        alt="OnlineShop"
+        class="img-responsive"
+      />
+    </a>
+  </div>
+  <div class="menu-sidebar-content js-scrollbar1">
+    <nav class="navbar-sidebar">
+      <ul class="list-unstyled navbar-list">
+        <!-- @TODO listing all category by default  -->
+        <li
+          *ngFor="
+            let productCategory of productCategoryResponse.productCategory
+          "
+        >
+          <a
+            routerLink="/category/{{ productCategory.id }}"
+            routerLinkActive="active-link"
+            >{{ productCategory.categoryName }}</a
+          >
+        </li>
+      </ul>
+    </nav>
+  </div>
+</aside>
+<!-- END MENU SIDEBAR-->

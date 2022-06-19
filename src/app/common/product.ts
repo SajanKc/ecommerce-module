@@ -1,4 +1,5 @@
 export class Product {
+  id: number | undefined;
   sku: string = '';
   name: string = '';
   description: string = '';

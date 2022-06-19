@@ -14,6 +14,8 @@ export class ProductListComponent implements OnInit {
   productResponse = {} as ProductResponse;
   productCategoryResponse = {} as ProductCategoryResponse;
 
+  imageLink: string = 'https://picsum.photos/200/300?random=';
+
   id: string = '';
   searchQuery: string = '';
   hasCategoryId: boolean = false;

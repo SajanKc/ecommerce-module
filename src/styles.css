@@ -542,7 +542,8 @@ input.au-input.au-input-xl {
   */
 
 .product-box img {
-  width: 150px;
+  width: 100%;
+  height: 280px;
 }
 
 .items select {

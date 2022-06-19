@@ -1,0 +1,21 @@
+<div class="detail-section marginTop">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6">
+        <img src="{{ imageLink || product.imageUrl }}" class="detail-img" />
+        <h3>{{ product.name }}</h3>
+        <div class="price">
+          {{ product.unitPrice | currency: "USD" }}
+        </div>
+        <a href="#" class="primary-btn">Add to cart</a>
+        <hr />
+      </div>
+      <div class="col-md-6">
+        <h4>Description</h4>
+        <p>{{ product.description }}</p>
+        <br />
+        <a class="primary-btn" routerLink="/products">Back</a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -21,6 +21,12 @@ export class ProductListComponent implements OnInit {
   hasCategoryId: boolean = false;
   hasSearchQuery: boolean = false;
 
+  // Properties for pagination
+  page: string = '';
+  size: string = '';
+  hasPage: boolean = false;
+  hasSize: boolean = false;
+
   constructor(
     private productService: ProductService,
     private productCategoryService: ProductCategoryService,
@@ -30,6 +36,8 @@ export class ProductListComponent implements OnInit {
   ngOnInit(): void {
     this.hasCategoryId = this.activatedRoute.snapshot.paramMap.has('id');
     this.hasSearchQuery = this.activatedRoute.snapshot.queryParamMap.has('q');
+    this.hasPage = this.activatedRoute.snapshot.queryParamMap.has('page');
+    this.hasSize = this.activatedRoute.snapshot.queryParamMap.has('size');
 
     // filtering by category id
     if (this.hasCategoryId) {
@@ -44,15 +52,25 @@ export class ProductListComponent implements OnInit {
         this.getSearchedProduct(this.searchQuery);
       });
       // default
+    } else if (this.hasPage && this.hasSize) {
+      this.activatedRoute.queryParamMap.subscribe((params) => {
+        this.page = params.get('page') || '';
+        this.size = params.get('size') || '';
+      });
+      this.getAllPaginatedProduct(this.page, this.size);
     } else {
-      this.getAllProduct();
+      let page = 0;
+      let size = 10;
+      this.getAllPaginatedProduct(page.toString(), size.toString());
     }
   }
 
-  getAllProduct() {
-    this.productService.getProductList().subscribe((data) => {
-      this.productResponse = data;
-    });
+  getAllPaginatedProduct(page: string, size: string) {
+    this.productService
+      .getPaginatedProductList(page, size)
+      .subscribe((data) => {
+        this.productResponse = data;
+      });
   }
 
   getProductByCategoryId(id: string) {

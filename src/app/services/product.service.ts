@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -17,6 +17,23 @@ export class ProductService {
   getProductList(): Observable<ProductResponse> {
     return this.httpClient.get<ProductResponse>(
       this.baseUrl.concat(this.apiEndPoint)
+    );
+  }
+
+  getPaginatedProductList(
+    page: string,
+    size: string
+  ): Observable<ProductResponse> {
+    let params = new HttpParams();
+    if (page != null && size != null) {
+      params = params.append('page', page);
+      params = params.append('size', size);
+    }
+    return this.httpClient.get<ProductResponse>(
+      this.baseUrl.concat(this.apiEndPoint),
+      {
+        params,
+      }
     );
   }
 
